@@ -131,11 +131,24 @@ void PiholeApi::populateClientGraph() {
     auto *reply = m_manager -> get(request);
     connect(reply, &QNetworkReply::finished, this, [this, reply] {
         QByteArray response = reply->readAll();
-        qDebug() << "populateClientGraph status:" << reply->error();
-        qDebug() << "populateClientGraph response:" << response;
         if(reply->error() == QNetworkReply::NoError) {
             auto doc = QJsonDocument::fromJson(response);
             emit populateClientGraphReady(doc.object().toVariantMap());
+        }
+        reply->deleteLater();
+    });
+}
+
+void PiholeApi::populateDomainGraph() {
+    QNetworkRequest request(QUrl(m_baseUrl + "/api/history"));
+    request.setRawHeader("sid", m_sid.toUtf8());
+
+    auto *reply = m_manager -> get(request);
+    connect(reply, &QNetworkReply::finished, this, [this, reply] {
+        QByteArray response = reply->readAll();
+        if(reply->error() == QNetworkReply::NoError) {
+            auto doc = QJsonDocument::fromJson(response);
+            emit populateDomainGraphReady(doc.object().toVariantMap());
         }
         reply->deleteLater();
     });
