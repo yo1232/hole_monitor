@@ -41,9 +41,7 @@ void PiholeApi::logout() {
 }
 
 
-void PiholeApi::fetchStats() {
-    qint64 until = QDateTime::currentSecsSinceEpoch();
-    qint64 from = until - 86400;
+void PiholeApi::fetchStats(qint64 until, qint64 from) {
     QNetworkRequest request(QUrl(m_baseUrl + "/api/stats/summary?from=" + QString::number(from) + "&until=" + QString::number(until)));
     request.setRawHeader("sid", m_sid.toUtf8());
 
@@ -93,7 +91,6 @@ void PiholeApi::fetchTopClientsBlocked() {
 }
 
 void PiholeApi::fetchTopDomains() {
-    qDebug() << "fetchTopDomains called, SID:" << m_sid;
     qint64 until = QDateTime(QDate::currentDate(), QTime(23, 59, 59)).toSecsSinceEpoch();
     qint64 from = QDateTime(QDate::currentDate(), QTime(0, 0, 0)).toSecsSinceEpoch();
     QNetworkRequest request(QUrl(m_baseUrl + "/api/stats/top_domains?from=" + QString::number(from) + "&until=" + QString::number(until)));
@@ -102,8 +99,6 @@ void PiholeApi::fetchTopDomains() {
     auto *reply = m_manager -> get(request);
     connect(reply, &QNetworkReply::finished, this, [this, reply]() {
         QByteArray response = reply->readAll();
-        qDebug() << "fetchTopDomains status:" << reply->error();
-        qDebug() << "fetchTopDomains response:" << response;
         if (reply->error() == QNetworkReply::NoError) {
             auto doc = QJsonDocument::fromJson(response);
             emit topDomainsReady(doc.object().toVariantMap());
@@ -113,7 +108,6 @@ void PiholeApi::fetchTopDomains() {
 }
 
 void PiholeApi::fetchTopDomainsBlocked() {
-    qDebug() << "fetchTopDomains called, SID:" << m_sid;
     qint64 until = QDateTime(QDate::currentDate(), QTime(23, 59, 59)).toSecsSinceEpoch();
     qint64 from = QDateTime(QDate::currentDate(), QTime(0, 0, 0)).toSecsSinceEpoch();
     QNetworkRequest request(QUrl(m_baseUrl + "/api/stats/top_domains?from=" + QString::number(from) + "&until=" + QString::number(until) + "&blocked=true"));
@@ -122,11 +116,26 @@ void PiholeApi::fetchTopDomainsBlocked() {
     auto *reply = m_manager -> get(request);
     connect(reply, &QNetworkReply::finished, this, [this, reply]() {
         QByteArray response = reply->readAll();
-        qDebug() << "fetchTopDomains status:" << reply->error();
-        qDebug() << "fetchTopDomains response:" << response;
         if (reply->error() == QNetworkReply::NoError) {
             auto doc = QJsonDocument::fromJson(response);
             emit topDomainsBlockedReady(doc.object().toVariantMap());
+        }
+        reply->deleteLater();
+    });
+}
+
+void PiholeApi::populateClientGraph() {
+    QNetworkRequest request(QUrl(m_baseUrl + "/api/history/clients?N=0"));
+    request.setRawHeader("sid", m_sid.toUtf8());
+
+    auto *reply = m_manager -> get(request);
+    connect(reply, &QNetworkReply::finished, this, [this, reply] {
+        QByteArray response = reply->readAll();
+        qDebug() << "populateClientGraph status:" << reply->error();
+        qDebug() << "populateClientGraph response:" << response;
+        if(reply->error() == QNetworkReply::NoError) {
+            auto doc = QJsonDocument::fromJson(response);
+            emit populateClientGraphReady(doc.object().toVariantMap());
         }
         reply->deleteLater();
     });

@@ -16,11 +16,12 @@ public:
     explicit PiholeApi(QObject *parent = nullptr);
     Q_INVOKABLE void login(const QString &password);
     Q_INVOKABLE void logout();
-    Q_INVOKABLE void fetchStats();
+    Q_INVOKABLE void fetchStats(qint64 until, qint64 from);
     Q_INVOKABLE void fetchTopClients();
     Q_INVOKABLE void fetchTopClientsBlocked();
     Q_INVOKABLE void fetchTopDomains();
     Q_INVOKABLE void fetchTopDomainsBlocked();
+    Q_INVOKABLE void populateClientGraph();
     QString sid() const { return m_sid; }
     QString baseUrl() const { return m_baseUrl; }
     void setBaseUrl(const QString &url);
@@ -33,6 +34,7 @@ signals:
     void topDomainsReady(QVariantMap data);
     void topClientsBlockedReady(QVariantMap data);
     void topDomainsBlockedReady(QVariantMap data);
+    void populateClientGraphReady(QVariantMap data);
     void baseUrlChanged();
 
 private:
