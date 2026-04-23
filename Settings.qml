@@ -5,6 +5,7 @@ import QtQuick.Layouts
 Item {
     // TODO: Get settings from pi-hole api
     Page {
+        anchors.fill: parent
         id: page4
         title: "Settings"
         header: ToolBar {

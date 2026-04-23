@@ -37,6 +37,7 @@ void PiholeApi::logout() {
     QNetworkRequest request(QUrl(m_baseUrl + "/api/auth"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     m_manager->deleteResource(request);
+    m_baseUrl = NULL;
     emit sidChanged();
 }
 
@@ -153,3 +154,21 @@ void PiholeApi::populateDomainGraph() {
         reply->deleteLater();
     });
 }
+
+void PiholeApi::fetchLists() {
+    QNetworkRequest request(QUrl(m_baseUrl + "/api/lists"));
+    request.setRawHeader("sid", m_sid.toUtf8());
+
+    auto *reply = m_manager -> get(request);
+    connect(reply, &QNetworkReply::finished, this, [this, reply] {
+        QByteArray response = reply->readAll();
+        if(reply->error() == QNetworkReply::NoError) {
+            auto doc = QJsonDocument::fromJson(response);
+            emit fetchListsReady(doc.object().toVariantMap());
+        }
+        reply->deleteLater();
+    });
+}
+
+
+

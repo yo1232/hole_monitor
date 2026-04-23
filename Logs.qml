@@ -7,6 +7,7 @@ Item {
     Page {
         id: page3
         title: "logs"
+        anchors.fill: parent
         Text {
             id: text3
             text: qsTr("logs")

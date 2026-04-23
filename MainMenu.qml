@@ -63,6 +63,7 @@ Item {
                     piholeApi.fetchTopDomains()
                     piholeApi.populateClientGraph()
                     piholeApi.populateDomainGraph()
+                    piholeApi.fetchLists()
                 }
             }
         }
@@ -320,12 +321,6 @@ Item {
 
             Item {
                 Layout.fillHeight: true
-            }
-            RowLayout {
-                Button {
-                    text: "logout"
-                    onClicked: piholeApi.logout()
-                }
             }
         }
     }

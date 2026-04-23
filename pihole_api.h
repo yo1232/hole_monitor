@@ -23,6 +23,7 @@ public:
     Q_INVOKABLE void fetchTopDomainsBlocked();
     Q_INVOKABLE void populateClientGraph();
     Q_INVOKABLE void populateDomainGraph();
+    Q_INVOKABLE void fetchLists();
     QString sid() const { return m_sid; }
     QString baseUrl() const { return m_baseUrl; }
     void setBaseUrl(const QString &url);
@@ -37,6 +38,7 @@ signals:
     void topDomainsBlockedReady(QVariantMap data);
     void populateClientGraphReady(QVariantMap data);
     void populateDomainGraphReady(QVariantMap data);
+    void fetchListsReady(QVariantMap data);
     void baseUrlChanged();
 
 private:
