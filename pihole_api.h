@@ -24,6 +24,7 @@ public:
     Q_INVOKABLE void populateClientGraph();
     Q_INVOKABLE void populateDomainGraph();
     Q_INVOKABLE void fetchLists();
+    Q_INVOKABLE void fetchLogs();
     QString sid() const { return m_sid; }
     QString baseUrl() const { return m_baseUrl; }
     void setBaseUrl(const QString &url);
@@ -39,6 +40,7 @@ signals:
     void populateClientGraphReady(QVariantMap data);
     void populateDomainGraphReady(QVariantMap data);
     void fetchListsReady(QVariantMap data);
+    void logsReady(QVariantMap data);
     void baseUrlChanged();
 
 private:

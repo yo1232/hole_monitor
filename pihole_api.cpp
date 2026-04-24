@@ -170,5 +170,20 @@ void PiholeApi::fetchLists() {
     });
 }
 
+void PiholeApi::fetchLogs() {
+    QNetworkRequest request(QUrl(m_baseUrl + "/api/queries"));
+    request.setRawHeader("sid", m_sid.toUtf8());
+
+    auto *reply = m_manager -> get(request);
+    connect(reply, &QNetworkReply::finished, this, [this, reply] {
+        QByteArray response = reply->readAll();
+        if(reply->error() == QNetworkReply::NoError) {
+            auto doc = QJsonDocument::fromJson(response);
+            emit logsReady(doc.object().toVariantMap());
+        }
+        reply->deleteLater();
+    });
+}
+
 
 
