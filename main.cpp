@@ -9,6 +9,8 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
+    app.setQuitOnLastWindowClosed(false);
+
     PiholeApi api;
     engine.rootContext()->setContextProperty("piholeApi", &api);
 
