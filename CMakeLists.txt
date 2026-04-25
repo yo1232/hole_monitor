@@ -30,6 +30,7 @@ qt_add_qml_module(apphole_monitor
         SOURCES
         SOURCES
         SOURCES pihole_api.h pihole_api.cpp
+        QML_FILES Groups.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

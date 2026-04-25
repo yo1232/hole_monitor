@@ -216,8 +216,70 @@ void PiholeApi::addList(QString url, QString comment, QString group, QString typ
     });
 }
 
+void PiholeApi::fetchGroups() {
+    QNetworkRequest request(QUrl(m_baseUrl + "/api/groups"));
+    request.setRawHeader("sid", m_sid.toUtf8());
 
+    auto *reply = m_manager -> get(request);
+    connect(reply, &QNetworkReply::finished, this, [this, reply] {
+        QByteArray response = reply->readAll();
+        if(reply->error() == QNetworkReply::NoError) {
+            auto doc = QJsonDocument::fromJson(response);
+            emit fetchGroupsReady(doc.object().toVariantMap());
+        }
+        reply->deleteLater();
+    });
+}
 
+void PiholeApi::deleteGroup(QString group) {
+    QNetworkRequest request(QUrl(m_baseUrl + "/api/groups/" + group));
+    request.setRawHeader("sid", m_sid.toUtf8());
+
+    m_manager -> deleteResource(request);
+    emit deletedGroup();
+}
+
+void PiholeApi::addGroup(QString group, QString comment, bool enabled) {
+    QNetworkRequest request(QUrl(m_baseUrl + "/api/groups"));
+    request.setRawHeader("sid", m_sid.toUtf8());
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QJsonObject body;
+    body["name"] = group;
+    body["comment"] = comment;
+    body["enabled"] = enabled;
+    qDebug()<<body;
+
+    auto *reply = m_manager->post(request, QJsonDocument(body).toJson());
+    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            emit groupAdded();
+        } else {
+            emit groupFailed2Add(reply->errorString());
+        }
+        reply->deleteLater();
+    });
+}
+
+void PiholeApi::updateGroup(QString group, QString comment, bool enabled) {
+    QNetworkRequest request(QUrl(m_baseUrl + "/api/groups/" + group));
+    request.setRawHeader("sid", m_sid.toUtf8());
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QJsonObject body;
+    body["name"] = group;
+    body["comment"] = comment;
+    body["enabled"] = enabled;
+    qDebug()<<body;
+
+    auto *reply = m_manager->put(request, QJsonDocument(body).toJson());
+    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            emit groupUpdated();
+        }
+        reply->deleteLater();
+    });
+}
 
 
 
