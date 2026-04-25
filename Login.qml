@@ -26,18 +26,18 @@ Item {
                     id: host
                     placeholderText: qsTr("pi-hole ip address or hostname")
                 }
-                Button {
-                    text: "save host"
-                    onClicked: piholeApi.baseUrl = host.text
-                }
-
                 TextField {
                     id: passwd
                     placeholderText: qsTr("pi-hole password")
                 }
                 Button {
                     text: "login"
-                    onClicked: piholeApi.login(passwd.text)
+                    onClicked: {
+                        piholeApi.baseUrl = host.text
+                        piholeApi.login(passwd.text)
+                        host.text = ""
+                        passwd.text = ""
+                    }
                 }
             }
             RowLayout {
