@@ -25,6 +25,11 @@ Item {
                         onClicked: root.stack.push("Lists.qml")
                     }
                     Button {
+                        text: "groups"
+                        onClicked: root.stack.push("Groups.qml")
+                    }
+
+                    Button {
                         text: "settings"
                         onClicked: root.stack.push("Settings.qml")
                     }
@@ -64,6 +69,7 @@ Item {
                     piholeApi.populateClientGraph()
                     piholeApi.populateDomainGraph()
                     piholeApi.fetchLists()
+                    piholeApi.fetchGroups()
                 }
             }
         }
