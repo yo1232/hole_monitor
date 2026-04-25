@@ -185,5 +185,42 @@ void PiholeApi::fetchLogs() {
     });
 }
 
+void PiholeApi::deleteList(QString list, QString type) {
+    QNetworkRequest request(QUrl(m_baseUrl + "/api/lists/" + list + "?type=" + type));
+    request.setRawHeader("sid", m_sid.toUtf8());
+
+    m_manager -> deleteResource(request);
+    emit deletedList();
+}
+
+void PiholeApi::addList(QString url, QString comment, QString group, QString type) {
+    QNetworkRequest request(QUrl(m_baseUrl + "/api/lists?type=" + type));
+    request.setRawHeader("sid", m_sid.toUtf8());
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QJsonObject body;
+    body["address"]=url;
+    body["comment"]=comment;
+    body["groups"]=group;
+    body["enabled"]="true";
+    qDebug()<<body;
+
+    auto *reply = m_manager->post(request, QJsonDocument(body).toJson());
+    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            emit listAdded();
+        } else {
+            emit listFailed2Add(reply->errorString());
+        }
+        reply->deleteLater();
+    });
+}
+
+
+
+
+
+
+
 
 

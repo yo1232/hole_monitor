@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Dialogs
 
 Item {
     Page {
@@ -29,6 +30,15 @@ Item {
             function onSidChanged() {
                 piholeApi.fetchLists()
             }
+            function onDeletedList() {
+                piholeApi.fetchLists()
+            }
+            function onListAdded() {
+                piholeApi.fetchLists()
+            }
+            function onListFailed2Add(error) {
+                console.log(error)
+            }
         }
         Rectangle {
             anchors.fill: parent
@@ -51,12 +61,57 @@ Item {
                         border.color: "#444444"
                         border.width: 1
                         radius: 4
-                        Text {
+                        RowLayout {
                             anchors.verticalCenter: parent.verticalCenter
                             anchors.horizontalCenter: parent.horizontalCenter
-                            color: "white"
-                            text: (modelData["address"] + " | type:  " + modelData["type"] + " | comment: " + modelData["comment"] + " | enabled: " + modelData["enabled"])
+                            Text {
+                                color: "white"
+                                text: (modelData["address"] + " | type:  " + modelData["type"] + " | comment: " + modelData["comment"] + " | enabled: " + modelData["enabled"])
+                            }
+                            Button {
+                                text: "Delete"
+                                onClicked: deleteDialog.open()
+                            }
+                            Dialog {
+                                id: deleteDialog
+                                title: "Confirm Delete"
+                                modal: true
+                                standardButtons: Dialog.Ok | Dialog.Cancel
+
+                                Text {
+                                    text: "Are you sure you want to delete " + modelData["address"] + "?"
+                                    color: "white"
+                                }
+                                onAccepted: {
+                                    piholeApi.deleteList(modelData["address"], modelData["type"])
+                                }
+                            }
                         }
+                    }
+                }
+            }
+            RowLayout {
+                anchors.bottom: parent.bottom
+                TextField {
+                    id: url
+                    placeholderText: qsTr("list Url")
+                }
+                TextField {
+                    id: comment
+                    placeholderText: qsTr("Comment")
+                }
+                Button {
+                    text: "Add blocklist"
+                    onClicked: {
+                        piholeApi.addList(url.text, comment.text, "[0]", "block")
+                        url.text = ""
+                    }
+                }
+                Button {
+                    text: "Add allowlist"
+                    onClicked: {
+                        piholeApi.addList(url.text, comment.text, "[0]", "allow")
+                        comment.text = ""
                     }
                 }
             }

@@ -25,6 +25,8 @@ public:
     Q_INVOKABLE void populateDomainGraph();
     Q_INVOKABLE void fetchLists();
     Q_INVOKABLE void fetchLogs();
+    Q_INVOKABLE void deleteList(QString list, QString type);
+    Q_INVOKABLE void addList(QString url, QString comment, QString group, QString type);
     QString sid() const { return m_sid; }
     QString baseUrl() const { return m_baseUrl; }
     void setBaseUrl(const QString &url);
@@ -41,6 +43,9 @@ signals:
     void populateDomainGraphReady(QVariantMap data);
     void fetchListsReady(QVariantMap data);
     void logsReady(QVariantMap data);
+    void deletedList();
+    void listAdded();
+    void listFailed2Add(QString error);
     void baseUrlChanged();
 
 private:
