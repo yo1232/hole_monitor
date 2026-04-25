@@ -237,7 +237,6 @@ Item {
                     border.width: 1
                     radius: 4
 
-
                     GraphsView {
                         id: chart2
                         anchors.fill: parent

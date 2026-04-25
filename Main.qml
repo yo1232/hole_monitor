@@ -67,6 +67,11 @@ Window {
             }
 
             MenuItem {
+                text: qsTr("Logout")
+                onTriggered: piholeApi.logout()
+            }
+
+            MenuItem {
                 text: qsTr("Quit")
                 onTriggered: Qt.quit()
             }

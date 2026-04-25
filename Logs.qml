@@ -3,7 +3,6 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Item {
-    // TODO: Get logs from pi-hole api
     Page {
         id: page3
         title: "logs"
