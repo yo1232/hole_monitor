@@ -30,9 +30,6 @@ Item {
             function onSidChanged() {
                 piholeApi.fetchGroups()
             }
-            function onGroupFailed2Add(error) {
-                console.log(error)
-            }
         }
         Rectangle {
             anchors.fill: parent
