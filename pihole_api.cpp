@@ -193,7 +193,7 @@ void PiholeApi::deleteList(QString list, QString type) {
     emit deletedList();
 }
 
-void PiholeApi::addList(QString url, QString comment, QString group, QString type) {
+void PiholeApi::addList(QString url, QString comment, QString group, QString type, bool enabled) {
     QNetworkRequest request(QUrl(m_baseUrl + "/api/lists?type=" + type));
     request.setRawHeader("sid", m_sid.toUtf8());
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -202,15 +202,13 @@ void PiholeApi::addList(QString url, QString comment, QString group, QString typ
     body["address"]=url;
     body["comment"]=comment;
     body["groups"]=group;
-    body["enabled"]="true";
+    body["enabled"]=enabled;
     qDebug()<<body;
 
     auto *reply = m_manager->post(request, QJsonDocument(body).toJson());
     connect(reply, &QNetworkReply::finished, this, [this, reply]() {
         if (reply->error() == QNetworkReply::NoError) {
             emit listAdded();
-        } else {
-            emit listFailed2Add(reply->errorString());
         }
         reply->deleteLater();
     });
@@ -254,8 +252,6 @@ void PiholeApi::addGroup(QString group, QString comment, bool enabled) {
     connect(reply, &QNetworkReply::finished, this, [this, reply]() {
         if (reply->error() == QNetworkReply::NoError) {
             emit groupAdded();
-        } else {
-            emit groupFailed2Add(reply->errorString());
         }
         reply->deleteLater();
     });
@@ -281,7 +277,25 @@ void PiholeApi::updateGroup(QString group, QString comment, bool enabled) {
     });
 }
 
+void PiholeApi::updateList(QString url, QString comment, QString group, QString type, bool enabled) {
+    QNetworkRequest request(QUrl(m_baseUrl + "/api/lists/" + url + "?type=" + type));
+    request.setRawHeader("sid", m_sid.toUtf8());
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
+    QJsonObject body;
+    body["comment"]=comment;
+    body["groups"]=group;
+    body["enabled"]=enabled;
+    qDebug()<<body;
+
+    auto *reply = m_manager->put(request, QJsonDocument(body).toJson());
+    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            emit listUpdated();
+        }
+        reply->deleteLater();
+    });
+}
 
 
 

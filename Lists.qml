@@ -36,9 +36,6 @@ Item {
             function onListAdded() {
                 piholeApi.fetchLists()
             }
-            function onListFailed2Add(error) {
-                console.log(error)
-            }
         }
         Rectangle {
             anchors.fill: parent
@@ -66,7 +63,13 @@ Item {
                             anchors.horizontalCenter: parent.horizontalCenter
                             Text {
                                 color: "white"
-                                text: (modelData["address"] + " | type:  " + modelData["type"] + " | comment: " + modelData["comment"] + " | enabled: " + modelData["enabled"])
+                                text: (modelData["address"] + " | type:  " + modelData["type"] + " | comment: " + modelData["comment"] + " | enabled: ")
+                            }
+                            Switch {
+                                checked: modelData["enabled"]
+                                onClicked: {
+                                    piholeApi.updateList(modelData["address"], modelData["comment"], modelData["group"], modelData["type"], modelData["enabled"] = checked)
+                                }
                             }
                             Button {
                                 text: "Delete"
@@ -91,6 +94,7 @@ Item {
                 }
             }
             RowLayout {
+                id:addlist
                 anchors.bottom: parent.bottom
                 TextField {
                     id: url
@@ -100,17 +104,25 @@ Item {
                     id: comment
                     placeholderText: qsTr("Comment")
                 }
+                property bool enabled: true
+                Switch {
+                    id: enable_switch
+                    checked: addlist.enabled
+                    onClicked: addlist.enabled = checked
+                }
                 Button {
                     text: "Add blocklist"
                     onClicked: {
-                        piholeApi.addList(url.text, comment.text, "[0]", "block")
+                        piholeApi.addList(url.text, comment.text, "[0]", "block", addlist.enabled)
                         url.text = ""
+                        comment.text = ""
                     }
                 }
                 Button {
                     text: "Add allowlist"
                     onClicked: {
-                        piholeApi.addList(url.text, comment.text, "[0]", "allow")
+                        piholeApi.addList(url.text, comment.text, "[0]", "allow", addlist.enabled)
+                        url.text = ""
                         comment.text = ""
                     }
                 }

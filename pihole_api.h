@@ -26,11 +26,12 @@ public:
     Q_INVOKABLE void fetchLists();
     Q_INVOKABLE void fetchLogs();
     Q_INVOKABLE void deleteList(QString list, QString type);
-    Q_INVOKABLE void addList(QString url, QString comment, QString group, QString type);
+    Q_INVOKABLE void addList(QString url, QString comment, QString group, QString type, bool enabled);
     Q_INVOKABLE void fetchGroups();
     Q_INVOKABLE void deleteGroup(QString group);
     Q_INVOKABLE void addGroup(QString group, QString comment, bool enabled);
     Q_INVOKABLE void updateGroup(QString group, QString comment, bool enabled);
+    Q_INVOKABLE void updateList(QString url, QString comment, QString group, QString type, bool enabled);
     QString sid() const { return m_sid; }
     QString baseUrl() const { return m_baseUrl; }
     void setBaseUrl(const QString &url);
@@ -49,12 +50,11 @@ signals:
     void logsReady(QVariantMap data);
     void deletedList();
     void listAdded();
-    void listFailed2Add(QString error);
     void fetchGroupsReady(QVariantMap data);
     void deletedGroup();
     void groupAdded();
-    void groupFailed2Add(QString error);
     void groupUpdated();
+    void listUpdated();
     void baseUrlChanged();
 
 private:
