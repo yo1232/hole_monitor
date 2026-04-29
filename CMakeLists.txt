@@ -5,7 +5,7 @@ project(hole_monitor VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(QT_QML_GENERATE_QMLLS_INI ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick Network)
+find_package(Qt6 REQUIRED COMPONENTS Quick Network Graphs QuickControls2)
 
 qt_standard_project_setup(REQUIRES 6.5)
 
@@ -47,6 +47,8 @@ set_target_properties(apphole_monitor PROPERTIES
 target_link_libraries(apphole_monitor
     PRIVATE Qt6::Quick
     PRIVATE Qt6::Network
+    PRIVATE Qt6::Graphs
+    PRIVATE Qt6::QuickControls2
 )
 
 install(TARGETS apphole_monitor

@@ -2,12 +2,15 @@
 #include <QQmlApplicationEngine>
 #include <pihole_api.h>
 #include <QQmlContext>
+#include <QtQuickControls2/QQuickStyle>
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
+    QQuickStyle::setStyle("Fusion");
 
     app.setQuitOnLastWindowClosed(false);
 

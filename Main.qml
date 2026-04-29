@@ -12,7 +12,7 @@ Window {
     visible: true
     title: qsTr("Hole-Monitor")
     color:"#1f1f1f"
-    onClosing: function(close) { // onClosing does in fact exist, if you see and error here ignore please it.
+    onClosing: function(close) { // onClosing does in fact exist, if you see and error here, please ignore it.
             root.hide()
         }
     StackView {
