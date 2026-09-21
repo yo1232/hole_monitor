@@ -156,6 +156,11 @@ Item {
                         anchors.fill: parent
                         axisX: barAxisX
                         axisY: barAxisY
+                        theme: GraphsTheme {
+                            backgroundColor: "transparent"
+                            plotAreaBackgroundColor: "transparent"
+                        }
+
 
                         BarSeries {
                             id: barSeries
@@ -248,6 +253,10 @@ Item {
                         anchors.fill: parent
                         axisX: barAxisX2
                         axisY: barAxisY2
+                        theme: GraphsTheme {
+                            backgroundColor: "transparent"
+                            plotAreaBackgroundColor: "transparent"
+                        }
 
                         BarSeries {
                             id: barSeries2
