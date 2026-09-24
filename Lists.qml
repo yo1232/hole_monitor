@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
-
+// TODO: Add groups control for lists
 Item {
     Page {
         anchors.fill: parent
@@ -17,6 +17,7 @@ Item {
         Component.onCompleted: {
             if (piholeApi && piholeApi.sid !== "") {
                 piholeApi.fetchLists()
+                piholeApi.fetchGroups()
             }
         }
         property var list: null
