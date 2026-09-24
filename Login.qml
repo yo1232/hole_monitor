@@ -28,6 +28,8 @@ Item {
                 }
                 TextField {
                     id: passwd
+                    passwordCharacter: '*'
+                    echoMode: TextInput.Password
                     placeholderText: qsTr("pi-hole password")
                 }
                 Button {
