@@ -159,7 +159,7 @@ Item {
                             anchors.fill: parent
                             anchors.margins: 10
                             Text {
-                                color: "white"
+                                color: "lightgrey"
                                 text: "----Domain----"
                             }
                             Text {
@@ -275,7 +275,7 @@ Item {
                                 text: "----Reply----"
                             }
                             Text {
-                                color: "lightgrey"
+                                color: "grey"
                                 text: "--Host--"
                             }
                             Text {
@@ -295,7 +295,7 @@ Item {
                                 text: "IPv6: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns.reply && dns_page.config.config.dns.reply.host ? dns_page.config.config.dns.reply.host.IPv6 : "Please log in")
                             }
                             Text {
-                                color: "lightgrey"
+                                color: "grey"
                                 text: "--Blocking--"
                             }
                             Text {

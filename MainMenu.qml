@@ -71,6 +71,7 @@ Item {
                     piholeApi.fetchLists()
                     piholeApi.fetchGroups()
                     piholeApi.fetchDNSConfig()
+                    piholeApi.fetchDHCPConfig()
                 }
             }
         }
