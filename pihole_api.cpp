@@ -297,6 +297,21 @@ void PiholeApi::updateList(QString url, QString comment, QString group, QString 
     });
 }
 
+void PiholeApi::fetchDNSConfig() {
+    QNetworkRequest request(QUrl(m_baseUrl + "/api/config/dns"));
+    request.setRawHeader("sid", m_sid.toUtf8());
+
+    auto *reply = m_manager -> get(request);
+    connect(reply, &QNetworkReply::finished, this, [this, reply] {
+        QByteArray response = reply->readAll();
+        if(reply->error() == QNetworkReply::NoError) {
+            auto doc = QJsonDocument::fromJson(response);
+            emit fetchDNSConfigReady(doc.object().toVariantMap());
+        }
+        reply->deleteLater();
+    });
+}
+
 
 
 

@@ -32,6 +32,7 @@ public:
     Q_INVOKABLE void addGroup(QString group, QString comment, bool enabled);
     Q_INVOKABLE void updateGroup(QString group, QString comment, bool enabled);
     Q_INVOKABLE void updateList(QString url, QString comment, QString group, QString type, bool enabled);
+    Q_INVOKABLE void fetchDNSConfig();
     QString sid() const { return m_sid; }
     QString baseUrl() const { return m_baseUrl; }
     void setBaseUrl(const QString &url);
@@ -55,6 +56,7 @@ signals:
     void groupAdded();
     void groupUpdated();
     void listUpdated();
+    void fetchDNSConfigReady(QVariantMap data);
     void baseUrlChanged();
 
 private:

@@ -70,6 +70,7 @@ Item {
                     piholeApi.populateDomainGraph()
                     piholeApi.fetchLists()
                     piholeApi.fetchGroups()
+                    piholeApi.fetchDNSConfig()
                 }
             }
         }
