@@ -8,6 +8,7 @@ PiholeApi::PiholeApi(QObject *parent)
     , m_manager(new QNetworkAccessManager(this))
 {}
 
+// Setting Pihole ip address or url
 void PiholeApi::setBaseUrl(const QString &url) {
     m_baseUrl = "http://" + url;
     emit PiholeApi::baseUrlChanged();
@@ -57,6 +58,7 @@ void PiholeApi::fetchStats(qint64 until, qint64 from) {
     });
 }
 
+// Statistics page data collection from api
 void PiholeApi::fetchTopClients() {
     qint64 until = QDateTime(QDate::currentDate(), QTime(23, 59, 59)).toSecsSinceEpoch();
     qint64 from = QDateTime(QDate::currentDate(), QTime(0, 0, 0)).toSecsSinceEpoch();
@@ -125,6 +127,7 @@ void PiholeApi::fetchTopDomainsBlocked() {
     });
 }
 
+// Main menu graphs data collection from api
 void PiholeApi::populateClientGraph() {
     QNetworkRequest request(QUrl(m_baseUrl + "/api/history/clients?N=0"));
     request.setRawHeader("sid", m_sid.toUtf8());
@@ -297,6 +300,7 @@ void PiholeApi::updateList(QString url, QString comment, QString group, QString 
     });
 }
 
+// Getting configuration data
 void PiholeApi::fetchDNSConfig() {
     QNetworkRequest request(QUrl(m_baseUrl + "/api/config/dns"));
     request.setRawHeader("sid", m_sid.toUtf8());
@@ -337,6 +341,21 @@ void PiholeApi::fetchNTPConfig() {
         if(reply->error() == QNetworkReply::NoError) {
             auto doc = QJsonDocument::fromJson(response);
             emit fetchNTPConfigReady(doc.object().toVariantMap());
+        }
+        reply->deleteLater();
+    });
+}
+
+void PiholeApi::fetchResolverConfig() {
+    QNetworkRequest request(QUrl(m_baseUrl + "/api/config/resolver"));
+    request.setRawHeader("sid", m_sid.toUtf8());
+
+    auto *reply = m_manager -> get(request);
+    connect(reply, &QNetworkReply::finished, this, [this, reply] {
+        QByteArray response = reply->readAll();
+        if(reply->error() == QNetworkReply::NoError) {
+            auto doc = QJsonDocument::fromJson(response);
+            emit fetchResolverConfigReady(doc.object().toVariantMap());
         }
         reply->deleteLater();
     });
