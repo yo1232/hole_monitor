@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtNetwork
-// TODO: Add possibility to modify values & fix layout
+// TODO: Add possibility to modify values
 Item {
     Page {
         id: dhcp_page
@@ -47,53 +47,66 @@ Item {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     spacing: 10
-                    Text {
-                        color: "white"
-                        text: "active: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.active : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "start: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.start : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "end: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.end : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "router: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.router : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "netmask: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.netmask : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "lease time: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.leaseTime : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "IPv6: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.ipv6 : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "rapidCommit: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.rapidCommit : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "multiDNS: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.multiDNS : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "logging: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.logging : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "ignoreUnknownClients: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.ignoreUnknownClients : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "hosts: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.hosts : "Please log in")
+                    Rectangle {
+                        color: "#2a2a2a"
+                        border.color: "#444444"
+                        radius: 4
+                        Layout.fillWidth: true
+                        implicitHeight: general.implicitHeight + 20
+                        Column {
+                            id: general
+                            spacing: 10
+                            anchors.fill: parent
+                            anchors.margins: 10
+                            Text {
+                                color: "white"
+                                text: "active: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.active : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "start: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.start : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "end: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.end : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "router: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.router : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "netmask: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.netmask : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "lease time: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.leaseTime : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "IPv6: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.ipv6 : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "rapidCommit: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.rapidCommit : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "multiDNS: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.multiDNS : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "logging: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.logging : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "ignoreUnknownClients: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.ignoreUnknownClients : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "hosts: " + (dhcp_page.config && dhcp_page.config.config && dhcp_page.config.config.dhcp ? dhcp_page.config.config.dhcp.hosts : "Please log in")
+                            }
+                        }
                     }
                 }
             }

@@ -48,7 +48,8 @@ Item {
                     Layout.fillHeight: true
                     spacing: 10
                     Rectangle {
-                        color: "#2c3e50"
+                        color: "#2a2a2a"
+                        border.color: "#444444"
                         radius: 4
                         Layout.fillWidth: true
                         implicitHeight: ipv4.implicitHeight + 20
@@ -72,7 +73,8 @@ Item {
                         }
                     }
                     Rectangle {
-                        color: "#2c3e50"
+                        color: "#2a2a2a"
+                        border.color: "#444444"
                         radius: 4
                         Layout.fillWidth: true
                         implicitHeight: ipv6.implicitHeight + 20
@@ -96,7 +98,8 @@ Item {
                         }
                     }
                     Rectangle {
-                        color: "#2c3e50"
+                        color: "#2a2a2a"
+                        border.color: "#444444"
                         radius: 4
                         Layout.fillWidth: true
                         implicitHeight: sync.implicitHeight + 20

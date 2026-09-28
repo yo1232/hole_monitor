@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtNetwork
-// TODO: Add possibility to modify values & fix layout
+// TODO: Add possibility to modify values
 Item {
     Page {
         id: dns_page
@@ -47,109 +47,118 @@ Item {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     spacing: 10
-                    Text {
-                        color: "white"
-                        text: "Upstreams: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.upstreams : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "CNAMEdeepInspect: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.CNAMEdeepInspect : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "blockESNI: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.blockESNI : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "EDNS0ECS: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.EDNS0ECS : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "ignoreLocalhost: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.ignoreLocalhost : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "showDNSSEC: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.showDNSSEC : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "analyzeOnlyAandAAAA: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.analyzeOnlyAandAAAA : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "piholePTR: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.piholePTR : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "replyWhenBusy: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.replyWhenBusy : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "blockTTL: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.blockTTL : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "hosts: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.hosts : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "domainNeeded: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.domainNeeded : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "expandHosts: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.expandHosts : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "bogusPriv: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.bogusPriv : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "dnssec: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.dnssec : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "interface: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.interface : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "hostRecord: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.hostRecord : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "listeningMode: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.listeningMode : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "queryLogging: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.queryLogging : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "cnameRecords: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.cnameRecords : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "port: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.port : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "localise: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.localise : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "revServers: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.revServers : "Please log in")
-                    }
-                    Text {
-                        color: "white"
-                        text: "reply: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.reply : "Please log in")
-                    }
-                }
-                ColumnLayout {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    spacing: 15
                     Rectangle {
-                        color: "#2c3e50"
+                        color: "#2a2a2a"
+                        border.color: "#444444"
+                        radius: 4
+                        Layout.fillWidth: true
+                        implicitHeight: general.implicitHeight + 20
+                        Column {
+                            id: general
+                            spacing: 10
+                            anchors.fill: parent
+                            anchors.margins: 10
+                            Text {
+                                color: "white"
+                                text: "Upstreams: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.upstreams : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "CNAMEdeepInspect: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.CNAMEdeepInspect : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "blockESNI: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.blockESNI : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "EDNS0ECS: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.EDNS0ECS : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "ignoreLocalhost: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.ignoreLocalhost : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "showDNSSEC: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.showDNSSEC : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "analyzeOnlyAandAAAA: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.analyzeOnlyAandAAAA : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "piholePTR: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.piholePTR : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "replyWhenBusy: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.replyWhenBusy : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "blockTTL: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.blockTTL : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "hosts: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.hosts : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "domainNeeded: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.domainNeeded : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "expandHosts: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.expandHosts : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "bogusPriv: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.bogusPriv : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "dnssec: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.dnssec : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "interface: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.interface : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "hostRecord: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.hostRecord : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "listeningMode: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.listeningMode : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "queryLogging: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.queryLogging : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "cnameRecords: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.cnameRecords : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "port: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.port : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "localise: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.localise : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "revServers: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.revServers : "Please log in")
+                            }
+                            Text {
+                                color: "white"
+                                text: "reply: " + (dns_page.config && dns_page.config.config && dns_page.config.config.dns ? dns_page.config.config.dns.reply : "Please log in")
+                            }
+                        }
+                    }
+                    Rectangle {
+                        color: "#2a2a2a"
+                        border.color: "#444444"
                         radius: 4
                         Layout.fillWidth: true
                         implicitHeight: domain.implicitHeight + 20
@@ -173,7 +182,8 @@ Item {
                         }
                     }
                     Rectangle {
-                        color: "#2c3e50"
+                        color: "#2a2a2a"
+                        border.color: "#444444"
                         radius: 4
                         Layout.fillWidth: true
                         implicitHeight: cache.implicitHeight + 20
@@ -205,7 +215,8 @@ Item {
                         }
                     }
                     Rectangle {
-                        color: "#2c3e50"
+                        color: "#2a2a2a"
+                        border.color: "#444444"
                         radius: 4
                         Layout.fillWidth: true
                         implicitHeight: blocking.implicitHeight + 20
@@ -233,7 +244,8 @@ Item {
                         }
                     }
                     Rectangle {
-                        color: "#2c3e50"
+                        color: "#2a2a2a"
+                        border.color: "#444444"
                         radius: 4
                         Layout.fillWidth: true
                         implicitHeight: speciald.implicitHeight + 20
@@ -261,7 +273,8 @@ Item {
                         }
                     }
                     Rectangle {
-                        color: "#2c3e50"
+                        color: "#2a2a2a"
+                        border.color: "#444444"
                         radius: 4
                         Layout.fillWidth: true
                         implicitHeight: reply.implicitHeight + 20
@@ -317,7 +330,8 @@ Item {
                         }
                     }
                     Rectangle {
-                        color: "#2c3e50"
+                        color: "#2a2a2a"
+                        border.color: "#444444"
                         radius: 4
                         Layout.fillWidth: true
                         implicitHeight: rate.implicitHeight + 20
