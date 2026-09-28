@@ -34,6 +34,7 @@ public:
     Q_INVOKABLE void updateList(QString url, QString comment, QString group, QString type, bool enabled);
     Q_INVOKABLE void fetchDNSConfig();
     Q_INVOKABLE void fetchDHCPConfig();
+    Q_INVOKABLE void fetchNTPConfig();
     QString sid() const { return m_sid; }
     QString baseUrl() const { return m_baseUrl; }
     void setBaseUrl(const QString &url);
@@ -59,6 +60,7 @@ signals:
     void listUpdated();
     void fetchDNSConfigReady(QVariantMap data);
     void fetchDHCPConfigReady(QVariantMap data);
+    void fetchNTPConfigReady(QVariantMap data);
     void baseUrlChanged();
 
 private:

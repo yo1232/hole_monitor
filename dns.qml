@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtNetwork
-
+// TODO: Add possibility to modify values & fix layout
 Item {
     Page {
         id: dns_page

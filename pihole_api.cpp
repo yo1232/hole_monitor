@@ -327,4 +327,19 @@ void PiholeApi::fetchDHCPConfig() {
     });
 }
 
+void PiholeApi::fetchNTPConfig() {
+    QNetworkRequest request(QUrl(m_baseUrl + "/api/config/ntp"));
+    request.setRawHeader("sid", m_sid.toUtf8());
+
+    auto *reply = m_manager -> get(request);
+    connect(reply, &QNetworkReply::finished, this, [this, reply] {
+        QByteArray response = reply->readAll();
+        if(reply->error() == QNetworkReply::NoError) {
+            auto doc = QJsonDocument::fromJson(response);
+            emit fetchNTPConfigReady(doc.object().toVariantMap());
+        }
+        reply->deleteLater();
+    });
+}
+
 
