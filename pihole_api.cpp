@@ -361,4 +361,20 @@ void PiholeApi::fetchResolverConfig() {
     });
 }
 
+void PiholeApi::fetchDatabaseConfig() {
+    QNetworkRequest request(QUrl(m_baseUrl + "/api/config/database"));
+    request.setRawHeader("sid", m_sid.toUtf8());
+
+    auto *reply = m_manager -> get(request);
+    connect(reply, &QNetworkReply::finished, this, [this, reply] {
+        QByteArray response = reply->readAll();
+        if(reply->error() == QNetworkReply::NoError) {
+            auto doc = QJsonDocument::fromJson(response);
+            emit fetchDatabaseConfigReady(doc.object().toVariantMap());
+        }
+        reply->deleteLater();
+    });
+}
+
+
 

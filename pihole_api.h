@@ -36,6 +36,7 @@ public:
     Q_INVOKABLE void fetchDHCPConfig();
     Q_INVOKABLE void fetchNTPConfig();
     Q_INVOKABLE void fetchResolverConfig();
+    Q_INVOKABLE void fetchDatabaseConfig();
     QString sid() const { return m_sid; }
     QString baseUrl() const { return m_baseUrl; }
     void setBaseUrl(const QString &url);
@@ -63,6 +64,7 @@ signals:
     void fetchDHCPConfigReady(QVariantMap data);
     void fetchNTPConfigReady(QVariantMap data);
     void fetchResolverConfigReady(QVariantMap data);
+    void fetchDatabaseConfigReady(QVariantMap data);
     void baseUrlChanged();
 
 private:
